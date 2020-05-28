@@ -22,16 +22,16 @@ rexp7 = re.compile(r'\s+') #export continuous whitespace characters process 7 th
 
 text = open('testpage.txt','r').read() #read file 
 i = rexp1.search(text)
-print(i.group(1)) #print title
+print(i.group(1)) #print title process 1 thats asked
 
-text = rexp2.sub(' ',text) #remove comments
-text = rexp3.sub(' ',text) #remove script and style tags with their content
+text = rexp2.sub(' ',text) #remove comments process 2 thats asked
+text = rexp3.sub(' ',text) #remove script and style tags with their content process 3 thats asked
 
 for i in rexp4.finditer(text):  
-        print('{} {}'.format(i.group(1),i.group(2)))  #print links
+        print('{} {}'.format(i.group(1),i.group(2)))  #print links process 4 thats asked
 
-text = rexp5.sub(' ',text) #remove tags 
-text = rexp6.sub(function,text) #replace entities according to table check function used
-text = rexp7.sub(' ',text) #replace continuous whitespaces with one whitespace
+text = rexp5.sub(' ',text) #remove tags process 5 thats asked
+text = rexp6.sub(function,text) #replace entities according to table check function used process 6 thats asked
+text = rexp7.sub(' ',text) #replace continuous whitespaces with one whitespace process 7 thats asked
 
 print(text) #print the text file after all the processes
