@@ -16,23 +16,21 @@ rexp1 = re.compile(r'<title>(.+?)</title>') #export title process 1 thats asked
 rexp2 = re.compile(r'<!--.*?-->',re.DOTALL) #export comments process 2 thats asked 
 rexp3 = re.compile(r'<(script|style).*?>.*?</(script|style)>',re.DOTALL) #export script and style tags with their content process 3 thats asked 
 rexp4 = re.compile(r'<a.+?href="(.*?)".*?>(.*?)</a>',re.DOTALL) #export hrefs-links process 4 thats asked
-rexp5part1 = re.compile(r'<.+?/>',re.DOTALL) #export tags like <..../> process 5 thats asked
-rexp5part2 = re.compile(r'<.+?>|</.+?>',re.DOTALL) #export tags like <...>...<..../> also process 5 thats asked
+rexp5 = re.compile(r'(<.+?/>)|(<.+?>|</.+?>)',re.DOTALL) #export tags like <..../> process 5 thats asked also export tags like <...>...<..../> also process 5 thats asked
 rexp6 = re.compile(r'&(amp|gt|lt|nbsp)') #export html special entities according to table presented process 6 thats asked
 rexp7 = re.compile(r'\s+') #export continuous whitespace characters process 7 thats asked
 
-text = open('testpage.txt','r').read() 
+text = open('testpage.txt','r').read() #read file 
 i = rexp1.search(text)
 print(i.group(1)) #print title
 
 text = rexp2.sub(' ',text) #remove comments
 text = rexp3.sub(' ',text) #remove script and style tags with their content
 
-for i in rexp4.finditer(text):  #print links
-        print('{} {}'.format(i.group(1),i.group(2)))  
+for i in rexp4.finditer(text):  
+        print('{} {}'.format(i.group(1),i.group(2)))  #print links
 
-text = rexp5part1.sub(' ',text) #remove tags part 1
-text = rexp5part2.sub(' ',text) #remove more tags part 2
+text = rexp5.sub(' ',text) #remove tags 
 text = rexp6.sub(function,text) #replace entities according to table check function used
 text = rexp7.sub(' ',text) #replace continuous whitespaces with one whitespace
 
